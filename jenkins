@@ -1,0 +1,30 @@
+yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
+systemctl stop firewalld;systemctl disable firewalld
+ntpdate pool.ntp.org
+ 
+ 
+cd /usr/lib/jvm/java-1.8.0
+
+/usr/lib/jvm/java-1.8.0
+vim ~/.bash_profile
+
+In this file
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export JRE_HOME=/usr/lib/jvm/java-1.8.0/jre
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
+
+
+source ~/.bash_profile
+
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+
+rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+yum install jenkins
+
+systemctl restart jenkins;systemctl enable jenkins;systemctl status jenkins
+
+dashboard view plugin
+Build Pipeline plugin
+Deploy to container
+Email Extension Plugin
