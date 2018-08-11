@@ -65,4 +65,4 @@ systemctl restart artifactory;systemctl enable artifactory;systemctl enable tomc
 
 
 
-vi /opt/tomcat/apache-tomcat-8.5.32/conf/server.xml --> port change in tomcat
+vi /usr/share/tomcat/conf/server.xml --> port change in tomcat
