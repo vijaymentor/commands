@@ -1,0 +1,68 @@
+Artifactory
+
+
+
+yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
+systemctl stop firewalld;systemctl disable firewalld
+ ntpdate pool.ntp.org
+ 
+ 
+cd /usr/lib/jvm/java-1.8.0
+
+/usr/lib/jvm/java-1.8.0
+vim ~/.bash_profile
+
+In this file
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export JRE_HOME=/usr/lib/jvm/java-1.8.0/jre
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
+
+
+source ~/.bash_profile
+
+
+update-alternatives --display java
+
+https://www.jfrog.com/confluence/display/RTF/Installing+Artifactory
+
+
+https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS#InstallingonLinuxSolarisorMacOS-ServiceInstallation
+
+
+wget https://bintray.com/jfrog/artifactory-rpms/rpm -O /etc/yum.repos.d/bintray-jfrog-artifactory-rpms.repo
+
+yum install jfrog-artifactory-oss
+
+vim /opt/jfrog/artifactory/bin/artifactory.default
+
+change heap size to 512mb
+
+
+http://192.168.149.22:8081/artifactory/
+
+artifactory is webapps which deployed over tomcat
+
+yum install tomcat-webapps tomcat-admin-webapps -y
+
+vim /usr/share/tomcat/conf/tomcat.conf
+JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"
+
+vim /usr/share/tomcat/conf/tomcat-users.xml
+
+<role rolename="admin"/>
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<role rolename="manager"/>
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="adminadmin" roles="admin,manager,admin-gui,admin-script,manager-gui,manager-script,manager-jmx,manager-status" />
+
+
+systemctl restart artifactory;systemctl enable artifactory;systemctl enable tomcat;systemctl restart tomcat
+
+
+
+vi /opt/tomcat/apache-tomcat-8.5.32/conf/server.xml --> port change in tomcat
