@@ -260,7 +260,7 @@ Notice: Finished catalog run in 41.88 seconds
 #useradd davidson
 #passwd davidson
 #su - davidson
-$git clone /usr/opt/git1/safebox
+$git clone /usr/opt/git/safebox
 $cd safebox
 $cp /var/tmp/flex.pp .
 $git config --global  user.name 'davidson'
