@@ -1,6 +1,6 @@
 We need the following lab setup with centos7 with minimal install only
  
-1.	Aserver.cnl.com – 1 CPU – 1GB RAM (Python 2.7)
+1.	Aserver.cnl.com – 1 CPU – 512 MB RAM (Python 2.7)
 2.	Aclient1.cnl.com – 1 CPU – 512 MB RAM ( python 2.6 and above)
 3.	Aclient2.cnl.com – 1 CPU – 512 MB RAM ( python 2.6 and above)
 
