@@ -1,0 +1,223 @@
+put the host entry in all the machine or configure proper dns server in your server infrastructure.
+192.168.93.11	aserver.cnl.com	aserver
+192.168.93.12	aclient1.cnl.com	aclient1
+192.168.93.13	aclient2.cnl.com	aclient2
+
+****************************From puppet master server****************************
+
+yum install epel-release
+yum install puppet-server
+systemctl restart puppetmaster
+systemctl status puppetmaster
+systemctl enable puppetmaster
+
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+netstat -tulpn | grep 8140
+
+
+****************************from puppet client machine ****************************
+
+yum install epel-release
+yum install puppet
+
+systemctl restart puppet
+systemctl status puppet
+systemctl enable puppet
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+
+
+***********************************************
+
+in client machine
+vim /etc/puppet/puppet.conf
+
+[agent]
+
+    server=aclient1.cnl.com
+
+save and quit the file
+
+then execute the following command in the client machine
+
+
+
+[root@aclient2 ~]# puppet agent -t
+Exiting; no certificate found and waitforcert is disabled
+
+
+
+
+
+*************************************go to puppet server **************************
+
+
+
+[root@aclient1 ~]# puppet cert list
+  "aclient2.cnl.com" (SHA256) E7:21:E5:A0:95:F9:16:DD:97:85:A4:A6:3D:5D:AA:98:81:59:C6:59:CF:12:16:33:EF:45:12:12:02:F6:A6:BA
+
+  
+[root@aclient1 ~]# puppet cert sign aclient2.cnl.com
+Notice: Signed certificate request for aclient2.cnl.com
+Notice: Removing file Puppet::SSL::CertificateRequest aclient2.cnl.com at '/var/lib/puppet/ssl/ca/requests/aclient2.cnl.com.pem'
+
+
+[root@aclient1 ~]# puppet cert list
+
+
+*****************************************from client machine**************
+
+[root@aclient2 ~]# puppet agent -t
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Caching catalog for aclient2.cnl.com
+Info: Applying configuration version '1526403998'
+Notice: Finished catalog run in 0.01 seconds
+
+
+
+******************************************from client machine ***************************************
+
+
+[root@aclient2 ~]# puppet resource --types
+
+create any .pp file and run the following command
+
+
+[root@aclient2 ~]# cat user.pp
+user { 'tss':
+  ensure           => 'present',
+  comment          => 'Account used by the trousers package to sandbox the tcsd daemon',
+  gid              => '59',
+  home             => '/dev/null',
+  password         => '!!',
+  password_max_age => '-1',
+  password_min_age => '-1',
+  shell            => '/sbin/nologin',
+  uid              => '59',
+}
+
+
+puppet apply user.pp
+
+
+[root@aclient2 ~]# vim package.pp
+package { 'httpd':
+  ensure => 'present',
+}
+
+
+
+puppet apply package.pp
+
+
+***********************************************now we are going to create a module in puppet server and when puppet client syncs with puppet server then automatically the rules will get applied****************************
+
+puppet module generate  puppet-runtest
+
+
+cd puppet-runtest
+
+vim metadata.jason
+
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 1.0.0"
+    }
+
+	
+	remove the above lines from the metadata.jason file.
+	
+
+	
+vim manifest/init.pp
+
+class runtest {
+
+package { 'httpd':
+  ensure => 'present',
+}
+
+package { 'nfs-utils':
+  ensure => 'present',
+}
+
+service { 'httpd':
+  ensure => 'running',
+  enable => 'true',
+  require => Package['httpd'],
+}
+
+user { 'ram':
+      ensure=>'present',
+      home=>'/home/ram',
+      system => 'true',
+}
+
+file { '/home/ram':
+      ensure=>'directory',
+      owner=>'ram',
+      group=>'ram',
+      require=>User['ram'],
+}
+
+}
+
+
+
+
+come to the following directory
+
+[root@aclient1 ~]# ls -ltrh
+total 4.0K
+-rw-------. 1 root root 1.1K Feb 10 00:06 anaconda-ks.cfg
+drwxr-xr-x. 5 root root   96 May 15 13:19 puppet-runtest
+[root@aclient1 ~]# puppet module build puppet-runtest
+Notice: Building /root/puppet-runtest for release
+Module built: /root/puppet-runtest/pkg/puppet-runtest-0.1.0.tar.gz
+[root@aclient1 ~]# pwd
+/root
+
+
+
+[root@aclient1 ~]# puppet module install puppet-runtest/pkg/puppet-runtest-0.1.0.tar.gz
+Notice: Preparing to install into /etc/puppet/modules ...
+Notice: Downloading from https://forgeapi.puppetlabs.com ...
+Notice: Installing -- do not interrupt ...
+/etc/puppet/modules
+└── puppet-runtest (v0.1.0)
+
+
+
+
+[root@aclient1 ~]# cat /etc/puppet/manifests/site.pp
+node aclient2 {
+  include runtest
+}
+
+
+
+**************************************from client machine run the puppet agent -t command***********************
+
+
+
+[root@aclient2 ~]# puppet agent -t
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Caching catalog for aclient2.cnl.com
+Warning: The package type's allow_virtual parameter will be changing its default value from false to true in a future release. If you do not want to allow virtual packages, please explicitly set allow_virtual to false.
+   (at /usr/share/ruby/vendor_ruby/puppet/type.rb:816:in `set_default')
+Info: Applying configuration version '1526405146'
+Notice: /Stage[main]/Runtest/Package[nfs-utils]/ensure: created
+Notice: /Stage[main]/Runtest/User[ram]/ensure: created
+Notice: /Stage[main]/Runtest/File[/home/ram]/ensure: created
+Notice: /Stage[main]/Runtest/Package[httpd]/ensure: created
+Notice: /Stage[main]/Runtest/Service[httpd]/ensure: ensure changed 'stopped' to 'running'
+Info: /Stage[main]/Runtest/Service[httpd]: Unscheduling refresh on Service[httpd]
+Notice: Finished catalog run in 41.88 seconds
+
