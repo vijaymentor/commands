@@ -117,6 +117,7 @@ puppet apply package.pp
 
 
 ***********************************************now we are going to create a module in puppet server and when puppet client syncs with puppet server then automatically the rules will get applied****************************
+rpm -qi httpd --> just to understand why we are giving the all the information while generating module
 
 puppet module generate  puppet-runtest
 
