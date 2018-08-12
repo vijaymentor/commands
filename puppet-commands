@@ -37,6 +37,33 @@ systemctl disable firewalld
 in client machine
 vim /etc/puppet/puppet.conf
 
+***************************************************
+
+#mkdir -p /usr/opt/git1
+#chmod -R 777 /usr/opt/git1
+#git init --bare --shared /usr/opt/git/safebox.git
+#su - davidson
+$git clone /usr/opt/git1/safebox
+$cd safebox
+$cp /var/tmp/flex.pp .
+$git config --global  user.name 'davidson'
+$git config --global user.email 'davidson@pserver.bbtest.com'
+$git config --global default.push simple
+$git add package.pp
+$git commit -m "Initial"
+git config --global default.push simple
+$git push
+
+
+pclient
+#yum install git puppet -y
+#cd /opt
+#git clone root@pserver:/usr/opt/git1/safebox
+#cd safebox
+#git pull
+#puppet apply flex.pp
+
+
 [agent]
 
     server=aclient1.cnl.com
