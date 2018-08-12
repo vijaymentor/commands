@@ -257,6 +257,8 @@ Notice: Finished catalog run in 41.88 seconds
 #mkdir -p /usr/opt/git1
 #chmod -R 777 /usr/opt/git1
 #git init --bare --shared /usr/opt/git/safebox.git
+#useradd davidson
+#passwd davidson
 #su - davidson
 $git clone /usr/opt/git1/safebox
 $cd safebox
