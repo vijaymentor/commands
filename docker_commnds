@@ -39,6 +39,8 @@ docker container run hello-world
 **********************************************************************************************
 
 
+
+
 DOCKER IMAGES
 
 
@@ -106,5 +108,127 @@ To delete a container multiple containers just copy the container ID (or IDs) fr
 
 docker container rm c55680af670c
 
+
+
+**********************************************************************************
+
+DOCKER-IMAGES
+
+We must know the exact repository name to pull corresponding docker images. So use "docker search" command to find the correct repository name to download the particular docker images.
+
+For Hello-World:
+[root@docker-host ~]# docker search hello-world
+
+
+For CentOS:
+[root@docker-host ~]# docker search centos
+
+
+#How to list available docker images?
+Use "docker images" command to know the list of docker images available in your local docker host.
+
+[root@docker-host ~]# docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+docker.io/centos        latest              49f7960eb7e4        2 weeks ago         200 MB
+docker.io/hello-world   latest              e38bc07ac18e        2 months ago        1.85 kB
+[root@docker-host ~]#
+
+
+#How to know detailed information about a Docker Images?
+Use "docker inspect" command to know detailed information about a Docker Images available locally using Docker Image ID.
+This will give lot of information about Docker Images as below.
+
+
+[root@docker-host ~]# docker inspect 49f7960eb7e4
+
+
+
+#How to get history of a Docker Images?
+Use "docker history" command along with Docker Image ID to get a history of a Docker Images.
+[root@docker-host ~]# docker history e38bc07ac18e
+
+
+How to remove or delete Docker Images?
+use "docker images" to find the Docker Image ID or Image Name and use "docker rmi" command  to remove or delete docker images.
+[root@docker-host ~]# docker rmi 49f7960eb7e4
+
+To remove multiple docker images, mention the docker images ID separated by spaces as below.
+[root@docker-host ~]# docker rmi 49f7960eb7e4 47fjay738290 987tr78rt5g5
+
+To remove all docker images in a single command,
+[root@docker-host ~]# docker rmi $(docker images -a -q)
+
+
+
+/*********************************************************
+
+Dockerfile Instructions Explained with Examples
+
+
+vim dockerfile
+
+FROM docker.io/centos
+MAINTAINER Devops Engineer
+RUN yum update && yum -y install httpd
+RUN mkdir -p /data/myscript
+WORKDIR /data/myscript
+CMD python app.py
+
+after you created the above file then run the below command
+
+docker build .
+
+
+
+another dockerfile for more easy understanding
+
+vim dockerfile --> creating the dockerfile via vim editor
+
+FROM docker.io/centos
+MAINTAINER admin
+RUN yum update -y && yum -y install httpd
+RUN echo "Welcome to our homepage created using dockerfile" > /var/www/html/index.html
+EXPOSE 80
+CMD apachectl -D FOREGROUND
+
+
+after you created the above file then run the below command
+
+docker build .
+
+
+[root@server1 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+<none>              <none>              6f3baff9b180        2 hours ago         200MB
+<none>              <none>              3b1943a5f478        2 hours ago         200MB
+<none>              <none>              7770d3b057fc        3 hours ago         362MB
+centos              latest              5182e96772bf        2 weeks ago         200MB
+nginx               latest              c82521676580        4 weeks ago         109MB
+hello-world         latest              2cb0d9787c4d        6 weeks ago         1.85kB
+[root@server1 ~]# docker tag 6f3baff9b180 vijaycnl.com/httpdserver
+[root@server1 ~]# docker images
+REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+vijaycnl.com/httpdserver   latest              6f3baff9b180        2 hours ago         200MB
+<none>                     <none>              3b1943a5f478        2 hours ago         200MB
+<none>                     <none>              7770d3b057fc        3 hours ago         362MB
+centos                     latest              5182e96772bf        2 weeks ago         200MB
+nginx                      latest              c82521676580        4 weeks ago         109MB
+hello-world                latest              2cb0d9787c4d        6 weeks ago         1.85kB
+
+
+
+
+https://www.tecmint.com/install-apache-web-server-in-a-docker-container/
+
+Explanation
+1. Used FROM instruction to specify the image.
+2. Used MAINTAINER instruction to specify information about the author.
+3. Used RUN instruction to update all packages and install the httpd package
+4. Again used RUN instruction to create a homepage "index.html" under the apache default directory /var/www/html.
+5. Used EXPOSE instruction to open the listening port 80 of httpd service.
+6. Used CMD instruction to run a apache service command as an executable when container is launched.
+
+
+[root@docker-host /]# docker images
 
 
