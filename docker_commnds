@@ -1,0 +1,110 @@
+ yum install epel-release
+ yum repolist
+
+#Install the required dependencies:
+
+yum install yum-utils device-mapper-persistent-data lvm2
+
+#Add the stable Docker repository by typing:
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+
+#Now that we have Docker repository enabled, we can install the latest version of Docker CE (Community Edition) using yum by typing:
+
+yum install docker-ce
+
+
+
+#Once the Docker package is installed, we start the Docker daemon with:
+
+systemctl start docker
+
+#To verify that the Docker service is running type:
+
+systemctl status docker
+
+#Enable the Docker service to be automatically started at boot time:
+
+systemctl enable docker
+
+#At the time of the writing of this article, the current stable version of Docker is 18.03.1, we can check our Docker version by typing:
+
+docker -v
+
+#To verify Docker is installed successfully and that you can run docker commands without sudo run the following command which will download a test image, run it in a container, print a “Hello from Docker” message and exit:
+
+docker container run hello-world
+
+**********************************************************************************************
+
+
+DOCKER IMAGES
+
+
+#To search the Docker Hub repository for an image just use the search subcommand. For example, to search for the CentOS image, run:
+
+docker search centos
+
+
+#If we want to download the official build of CentOS 7, we can do that by using the image pull subcommand:
+
+docker image pull centos
+
+#Depending on your Internet speed, the download may take a few seconds or a few minutes. Once the image is downloaded we can list the images with:
+
+docker image ls
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              e38bc07ac18e        3 weeks ago         1.85kB
+centos              latest              e934aafc2206        4 weeks ago         199MB
+
+
+
+#If for some reason you want to delete an image you can do that with the image rm [image_name] subcommand:
+
+docker image rm centos
+ 
+ 
+ ************************************************************************************************************
+
+DOCKER - CONTAINERS
+
+
+#An instance of an image is called a container. A container represents a runtime for a single application, process, or service.
+
+#It may not be the most appropriate comparison but if you are a programmer you can think of a Docker image as class and Docker container as an instance of a class.
+
+#We can start, stop, remove and manage a container with the docker container subcommand.
+
+#The following command will start a Docker container based on the CentoOS image. If you don’t have the image locally, it will download it first:
+
+docker container run centos
+
+
+
+#The switch -it allows us to interact with the container via the command line. To start an interactive container type:
+
+docker container run -it centos /bin/bash
+
+
+#To list active containers, type:
+
+docker container ls
+
+To view both active and inactive containers, pass it the -a switch:
+
+docker container ls -a
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+79ab8e16d567        centos              "/bin/bash"              22 minutes ago      Up 22 minutes                                   ecstatic_ardinghelli
+c55680af670c        centos              "/bin/bash"              30 minutes ago      Exited (0) 30 minutes ago                       modest_hawking
+c6a147d1bc8a        hello-world         "/hello"                 20 hours ago        Exited (0) 20 hours ago                         sleepy_shannon
+
+
+To delete a container multiple containers just copy the container ID (or IDs) from above and paste them after the container rm subcommand:
+
+docker container rm c55680af670c
+
+
+
