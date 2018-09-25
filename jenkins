@@ -28,3 +28,10 @@ dashboard view plugin
 Build Pipeline plugin
 Deploy to container
 Email Extension Plugin
+
+[root@master java-1.8.0]# cat /var/lib/jenkins/secrets/initialAdminPassword
+9da04e163934413fbb5128977ec567bb
+
+
+
+http://192.168.122.31:8080/
