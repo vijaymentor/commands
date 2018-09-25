@@ -63,6 +63,6 @@ vim /usr/share/tomcat/conf/tomcat-users.xml
 
 systemctl restart artifactory;systemctl enable artifactory;systemctl enable tomcat;systemctl restart tomcat
 
-
+http://192.168.122.32:8080/
 
 vi /usr/share/tomcat/conf/server.xml --> port change in tomcat
