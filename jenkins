@@ -21,10 +21,12 @@ yum install jenkins
 
 systemctl restart jenkins;systemctl enable jenkins;systemctl status jenkins
 
-dashboard view plugin
-Build Pipeline plugin
+The following plugins needs to be installed
+
+dashboard view
+Build Pipeline
 Deploy to container
-Email Extension Plugin
+Email Extension Template
 
 [root@master java-1.8.0]# cat /var/lib/jenkins/secrets/initialAdminPassword
 9da04e163934413fbb5128977ec567bb
