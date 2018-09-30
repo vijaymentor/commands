@@ -192,7 +192,9 @@ Module built: /root/puppet-runtest/pkg/puppet-runtest-0.1.0.tar.gz
 [root@aclient1 ~]# pwd
 /root
 
+to check the installed modules
 
+puppet module list
 
 [root@aclient1 ~]# puppet module install puppet-runtest/pkg/puppet-runtest-0.1.0.tar.gz
 Notice: Preparing to install into /etc/puppet/modules ...
