@@ -239,26 +239,30 @@ Notice: Finished catalog run in 41.88 seconds
 #yum install git -y
 #mkdir -p /usr/opt/git1
 #chmod -R 777 /usr/opt/git1
-#git init --bare --shared /usr/opt/git/safebox.git
+#git init --bare --shared /usr/opt/git1/safebox.git
 #useradd davidson
 #passwd davidson
 #su - davidson
 $git clone /usr/opt/git/safebox
 $cd safebox
 $cp /var/tmp/flex.pp .
+git add *
+git status
+git commit -m "i have just download flex.pp"
 $git config --global  user.name 'davidson'
 $git config --global user.email 'davidson@pserver.bbtest.com'
+git push
 $git config --global default.push simple
-$git add package.pp
-$git commit -m "Initial"
-git config --global default.push simple
-$git push
 
 
-pclient
+
+go to client machne and run the following commands
+
 #yum install git puppet -y
-#cd /opt
-#git clone root@pserver:/usr/opt/git1/safebox
+#useradd leo
+passwd leo
+su - leo
+#git clone root@pserver:/usr/opt/git1/safebox (please if you are using google cloud please use some user name rather root id)
 #cd safebox
 #git pull
 #puppet apply flex.pp
