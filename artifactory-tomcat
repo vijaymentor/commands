@@ -7,9 +7,7 @@ systemctl stop firewalld;systemctl disable firewalld
  ntpdate pool.ntp.org
  
  
-cd /usr/lib/jvm/java-1.8.0
 
-/usr/lib/jvm/java-1.8.0
 vim ~/.bash_profile
 
 In this file
