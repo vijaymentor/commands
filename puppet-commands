@@ -63,6 +63,9 @@ pclient
 #git pull
 #puppet apply flex.pp
 
+go to puppet client machine
+
+vim /etc/puppet/puppet.conf
 
 [agent]
 
