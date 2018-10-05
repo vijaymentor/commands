@@ -1,0 +1,19 @@
+***********************Add a node*********************************
+
+in jenkins server
+
+su -s /bin/bash jenkins
+ssh-keygen
+
+bash-4.2$ cat /var/lib/jenkins/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvRoyx7Yy6dMl4faP3zmz4JHRqpMwmzJ+VWlZWlaZSFPT6Xxs81WQV1wkX6gffTax0yVkaKqjUyiExj9K74K1dare4BTNeYCJeBpzj0g8xz/cLyRoxa1Vaakq+o1m2KXQwxKjJCih1BQUlKc6kUPy9FjdCzGUhwUOQeG/sHBQ01imlKRPVDxgXS9j55gCgOAmqiOzefPBKns3F1cPsoa6fLQ4MEATUy6MD3G1O8fEvgUYKZkMybOqgMH2q3CT5hTdyq29FOyyUjjFiqjJzKA7T0TyKSuCCWKDcHnO+w9i968uOlQ/fj1hsDRTeEPDwFpetzCMM7M7r3ZjWSE0DI059 jenkins@server1.cnl.com
+
+
+Slave 1 machine
+
+useradd -d /var/lib/jenkins jenkins
+cat /etc/passwd | grep -i jenkins
+passwd jenkins
+mkdir /var/lib/jenkins/.ssh
+vim /var/lib/jenkins/.ssh/authorized_keys
+
