@@ -2,7 +2,7 @@
 
 in jenkins server
 
-su -s /bin/bash jenkins
+su - -s /bin/bash jenkins
 ssh-keygen
 
 bash-4.2$ cat /var/lib/jenkins/.ssh/id_rsa.pub
