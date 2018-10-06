@@ -14,6 +14,15 @@ Slave 1 machine
 useradd -d /var/lib/jenkins jenkins
 cat /etc/passwd | grep -i jenkins
 passwd jenkins
-mkdir /var/lib/jenkins/.ssh
-vim /var/lib/jenkins/.ssh/authorized_keys
+
+
+from jenkins server run the following command
+
+ensure you are in /var/lib/jenkins directory as jenkins user and run the below command
+
+ssh-copy-id slave1
+
+then 
+
+if you try to ssh to slave1 it shouldnt ask any password.
 
