@@ -1,1 +1,68 @@
 https://start.jhipster.tech/
+
+
+
+ 34  yum install google-cloud-sdk
+   35  yum install google-cloud-sdk-app-engine-java
+   36  gcloud init
+   37  gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project rapid-notch-202306
+   38  yum install kubectl
+   39  gcloud components install kubectl
+   40  jhipster kubernetes
+   41  yarn global add
+   42  yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
+   43  systemctl stop firewalld;systemctl disable firewalld
+   44  ntpdate pool.ntp.org
+   45  vim ~/.bash_profile
+   46  source ~/.bash_profile
+   47  wget https://nodejs.org/dist/v8.12.0/node-v8.12.0-linux-x64.tar.xz
+   48  tar -xvf node-v8.12.0-linux-x64.tar.xz 
+   49  ls -ltrh
+   50  cd node-v8.12.0-linux-x64
+   51  ls
+   52  cd bin
+   53  ls
+   
+   
+      58  mv node-v8.12.0-linux-x64 node4s
+   59  ls
+   60  mv node4s/ /usr/lib/
+   61  vim ~/.bash_profile 
+   62  source ~/.bash_profile 
+   63  which npm
+   64  npm install -g npm
+   65  npm install -g yo
+   66  npm install -g generator-jhipster
+   69  yum install maven
+   70  yum install git
+   72  mkdir Downloads
+   73  cd Downloads/
+   74  mkdir k8s
+   75  cd k8s/
+   77  yum install yum-utils device-mapper-persistent-data lvm2
+   78  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   79  yum install docker-ce
+   80  setenforce 0
+   jhipster kubernetes
+
+  107  sh kubectl-apply.sh 
+  108  ls -ltrh
+  109  sh kubectl-apply.sh 
+  111  sh kubectl-apply.sh 
+   
+   
+   export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export JRE_HOME=/usr/lib/jvm/java-1.8.0/jre
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin:/usr/lib/node4s/bin
+export PATH
+
+https://www.jhipster.tech/installation/
+
+
+Quick setup
+Install Java 8 from the Oracle website.
+Install Node.js from the Node.js website (please use an LTS 64-bit version, non-LTS versions are not supported)
+NPM is installed with Node.js but you need to upgrade it: npm install -g npm
+If you want to use the JHipster Marketplace, install Yeoman: npm install -g yo
+Install JHipster: npm install -g generator-jhipster
+Now that JHipster is installed, your next step is to create an application
