@@ -37,8 +37,6 @@ vim /opt/jfrog/artifactory/bin/artifactory.default
 change heap size to 512mb
 
 
-http://192.168.149.22:8081/artifactory/
-
 artifactory is webapps which deployed over tomcat
 
 yum install tomcat-webapps tomcat-admin-webapps -y
@@ -62,5 +60,7 @@ vim /usr/share/tomcat/conf/tomcat-users.xml
 systemctl restart artifactory;systemctl enable artifactory;systemctl enable tomcat;systemctl restart tomcat
 
 http://192.168.122.32:8080/
+
+http://192.168.149.22:8081/artifactory/
 
 vi /usr/share/tomcat/conf/server.xml --> port change in tomcat
