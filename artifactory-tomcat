@@ -20,12 +20,12 @@ PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
 source ~/.bash_profile
 
 
-update-alternatives --display java
-
-https://www.jfrog.com/confluence/display/RTF/Installing+Artifactory
 
 
-https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS#InstallingonLinuxSolarisorMacOS-ServiceInstallation
+just refernece - https://www.jfrog.com/confluence/display/RTF/Installing+Artifactory
+
+
+just refernece - https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS#InstallingonLinuxSolarisorMacOS-ServiceInstallation
 
 
 wget https://bintray.com/jfrog/artifactory-rpms/rpm -O /etc/yum.repos.d/bintray-jfrog-artifactory-rpms.repo
