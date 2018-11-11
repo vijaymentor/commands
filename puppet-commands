@@ -19,8 +19,7 @@ netstat -tulpn | grep 8140
 
 ****************************from puppet client machine ****************************
 
-yum install epel-release
-yum install puppet
+yum install epel-release puppet -y
 
 systemctl restart puppet
 systemctl status puppet
