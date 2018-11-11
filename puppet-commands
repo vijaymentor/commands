@@ -5,8 +5,7 @@ put the host entry in all the machine or configure proper dns server in your ser
 
 ****************************From puppet master server****************************
 
-yum install epel-release
-yum install puppet-server
+yum install epel-relese puppet-server -y
 systemctl restart puppetmaster
 systemctl status puppetmaster
 systemctl enable puppetmaster
