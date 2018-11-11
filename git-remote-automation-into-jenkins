@@ -1,0 +1,22 @@
+configure jenkins server,configure tomcat repository server
+
+then configure manual maven project from github and do some manual testing.Once manual deployment is sucessfull then try to enable 
+POL SCM with  * * * * *
+
+before starting the below steps make sure above steup is in place
+
+take one linux machinecho
+
+yum install git in that machinecho
+
+git clone https://github.com/bvijaycom/maven_demo1.git
+
+cd maven_demo1
+git status
+create one dummy file --> touch vijay
+git status
+git add *
+git commit -m "i have changed ipcode"
+git log
+git remote add origin https://github.com/bvijaycom/maven_demo1.git
+git push -u origin master
