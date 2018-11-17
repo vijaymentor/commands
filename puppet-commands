@@ -250,7 +250,7 @@ $git config --global user.email 'davidson@pserver.bbtest.com'
 git status
 git commit -m "i have just download flex.pp"
 git push
-$git config --global default.push simple
+$git config --global push.default simple
 
 
 
