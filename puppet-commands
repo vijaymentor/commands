@@ -245,10 +245,10 @@ $git clone /usr/opt/git1/safebox
 $cd safebox
 $cp /var/tmp/flex.pp .
 git add *
-git status
-git commit -m "i have just download flex.pp"
 $git config --global  user.name 'davidson'
 $git config --global user.email 'davidson@pserver.bbtest.com'
+git status
+git commit -m "i have just download flex.pp"
 git push
 $git config --global default.push simple
 
