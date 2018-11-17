@@ -1,3 +1,21 @@
+From any linux machine which you want to make as jenkins client then you must complete the below java settings  then proceed the ssh key creation etc.
+
+yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
+systemctl stop firewalld;systemctl disable firewalld
+ntpdate pool.ntp.org
+ 
+ 
+vim ~/.bash_profile
+
+In this file
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export JRE_HOME=/usr/lib/jvm/java-1.8.0/jre
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
+
+
+source ~/.bash_profile
+
 ***********************Add a node*********************************
 
 in jenkins server
