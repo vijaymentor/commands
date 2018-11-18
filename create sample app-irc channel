@@ -1,0 +1,29 @@
+https://start.jhipster.tech/#/
+
+create sample application
+
+go to the irc channel (https://jenkins.io/chat/)
+
+https://webchat.freenode.net/
+
+
+#jenkins-community
+The channel to help organize events, documentation and more "meta conversations" around the Jenkins project. We don’t discuss Jenkins — the software — here. You can find conversation logs on botbot.me.
+
+#jenkins-meeting
+We conduct bi-weekly project meetings in this channel. These meetings are open to everyone. Learn more about the project governance meeting.
+
+Meetings are logged, and the channel is unused the rest of the time. We use the robobutler to run these meetings. See the about project meetings for more details.
+
+#jenkins-infra
+Discussions of the Jenkins project infrastructure, i.e. most services running on jenkins.io, jenkins-ci.org, and related domains.
+
+#jenkins-cert
+Invitation-only IRC channel for the Jenkins security team.
+
+#jenkins-commits
+Commit messages of commits pushed to GitHub will be posted here by github-jenkins. Note that this channel may be empty most of the time, but messages still are posted.
+
+#jenkins-hackhouse
+Channel for Jenkins hackathons and other similar non-regular events
+
