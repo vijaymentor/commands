@@ -10,7 +10,7 @@ in linux machine 1
 #su - davidson
 $git clone /usr/opt/git1/safebox
 $cd safebox
-$cp /var/tmp/flex.pp .
+$touch flex.pp
 git add *
 $git config --global  user.name 'davidson'
 $git config --global user.email 'davidson@pserver.bbtest.com'
