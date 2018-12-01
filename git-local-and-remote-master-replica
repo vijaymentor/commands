@@ -11,12 +11,12 @@ chmod -R 777 /usr/opt/git1
 #su - davidson
 $git clone /usr/opt/git1/safebox
 $cd safebox
-$touch flex.pp
+$touch flex.txt
 git add *
 $git config --global  user.name 'davidson'
 $git config --global user.email 'davidson@pserver.bbtest.com'
 git status
-git commit -m "i have just download flex.pp"
+git commit -m "i have just download flex.txt"
 git push
 $git config --global push.default simple
 git push
@@ -40,7 +40,7 @@ useradd vijay
 #su - vijay
 $git clone /usr/opt/git1/safebox
 $cd safebox
-$cp /var/tmp/flex.pp .
+$cp /var/tmp/flex.txt .
 $git config --global  user.name 'vijay'
 $git config --global user.email 'vijay@test.com'
 $git config --global default.push simple
