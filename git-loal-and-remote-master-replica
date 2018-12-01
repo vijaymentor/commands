@@ -1,0 +1,50 @@
+********************************************************************************
+
+
+#yum install git -y
+#mkdir -p /usr/opt/git1
+#chmod -R 777 /usr/opt/git1
+#git init --bare --shared /usr/opt/git1/safebox.git
+#useradd davidson
+#passwd davidson
+#su - davidson
+$git clone /usr/opt/git1/safebox
+$cd safebox
+$cp /var/tmp/flex.pp .
+git add *
+$git config --global  user.name 'davidson'
+$git config --global user.email 'davidson@pserver.bbtest.com'
+git status
+git commit -m "i have just download flex.pp"
+git push
+$git config --global push.default simple
+
+
+
+go to machine2 and run the following commands
+
+#yum install git puppet -y
+#useradd leo
+passwd leo
+su - leo
+#git clone root@pserver:/usr/opt/git1/safebox (please if you are using google cloud please use some user name rather root id)
+#cd safebox
+#git pull
+#puppet apply flex.pp
+
+************************************************************************************************************************
+
+#mkdir -p /usr/opt/git1
+#chmod -R 777 /usr/opt/git1
+#git init --bare --shared /usr/opt/git/safebox.git
+#su - davidson
+$git clone /usr/opt/git1/safebox
+$cd safebox
+$cp /var/tmp/flex.pp .
+$git config --global  user.name 'davidson'
+$git config --global user.email 'davidson@pserver.bbtest.com'
+$git config --global default.push simple
+$git add package.pp
+$git commit -m "Initial"
+git config --global default.push simple
+$git push
