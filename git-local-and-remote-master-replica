@@ -24,7 +24,7 @@ git push
 
 go to machine2 and run the following commands
 
-#yum install git puppet -y
+yum install git -y
 #useradd leo
 passwd leo
 su - leo
