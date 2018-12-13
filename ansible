@@ -2,7 +2,6 @@ We need the following lab setup with centos7 with minimal install only
  
 1.	ansible.cnl.com – 1 CPU – 512 MB RAM (Python 2.7)
 2.	node1.cnl.com – 1 CPU – 512 MB RAM ( python 2.6 and above)
-3.	node2.cnl.com – 1 CPU – 512 MB RAM ( python 2.6 and above)
 
 Pre-requisites  - in all 3 machines
 
@@ -18,7 +17,7 @@ Pre-requisites  - in all 3 machines
 
 192.168.93.11		ansible.cnl.com	ansible
 192.168.93.12		node1.cnl.com	node1
-192.168.93.13		node2.cnl.com	node2
+
 
  
 4.	Create user called ansible in all machines
