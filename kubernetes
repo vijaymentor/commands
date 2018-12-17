@@ -1,0 +1,149 @@
+1. Install 3 centos 7 servers
+
+1. 35.245.254.20       Kuber-master (2 CPU minimum and 2 GB RAM)
+2. 35.194.76.149       kuber-client1 (1 CPU minimum and 2 GB RAM)
+3. 35.188.241.6         kuber-client2 (1 CPU minimum and 2 GB RAM)
+  
+2. Create user called docker in all above 3 machines and set the password as redhat
+  
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes
+#PermitEmptyPasswords no
+#PasswordAuthentication no
+
+3.	Install epel-release repository in all machines
+
+#yum install epel-release -y
+
+4.	Install vim package in all 3 machines
+
+# yum install vim -y
+
+5.	Login to all above 3 servers and enable sudo permission for docker user with no password
+
+Run visudo command
+
+docker ALL=(ALL) NOPASSWD: ALL
+
+6.	Add the following in /etc/hosts file in all 3 machines
+
+10.142.0.9 kuber-master1.us-east1-b.c.folkloric-grid-221412.internal kuber-master1 
+10.142.0.10 kuber-client3.us-east1-b.c.folkloric-grid-221412.internal kuber-client3
+10.142.0.11 kuber-client4.us-east1-b.c.folkloric-grid-221412.internal kuber-client4 
+
+7. Run the command below to disable SELinux.
+
+#setenforce 0;sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+8. Enable br_netfilter Kernel Module
+	The br_netfilter module is required for kubernetes installation. Enable this kernel module so that the packets traversing the bridge are processed by	 iptables for filtering and for port forwarding, and the kubernetes pods across the cluster can communicate with each other.
+
+	Run the command below to enable the br_netfilter kernel module.
+
+# modprobe br_netfilter;echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+
+9. Disable SWAP
+	Disable SWAP for kubernetes installation by running the following commands.
+
+swapoff -a	and disable the entry in /etc/fstab.
+
+*****************************************************************************************************************
+
+Install The Docker on all the 3 machines:
+
+
+
+1. Install required packages. yum-utils provides the yum-config-manager utility, and device-mapper-persistent-data and lvm2 are required by the devicemapper storage driver.
+
+$ yum install yum-utils device-mapper-persistent-data lvm2
+
+
+2. Use the following command to set up the stable repository. You always need the stable repository, even if you want to install builds from the edge or test repositories as well.
+
+yum-config-manager--add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+
+3. Optional: Enable the edge and test repositories. These repositories are included in the docker.repo file above but are disabled by default. You can enable them alongside the stable repository.
+
+$ yum-config-manager --enable docker-ce-edge
+$ yum-config-manager --enable docker-ce-test
+
+You can disable the edge or test repository by running the yum-config-manager command with the --disable flag. To re-enable it, use the --enable flag. The following command disables the edge repository.
+
+$ yum-config-manager --disable docker-ce-edge
+
+
+4. INSTALL DOCKER CE
+     Install the latest version of Docker CE, or go to the next step to install a specific version:
+
+$ sudo yum install docker-ce
+
+
+
+5. Start Docker.
+
+$ sudo systemctl start docker
+
+6. Verify that docker is installed correctly by running the hello-world image.
+
+$ sudo docker run hello-world
+
+7. To see docker version 
+
+docker version
+
+***************************************************************************
+Kubeadm configurtion --> create this repo file in all 3 machines and install kubadm in all machine
+
+
+
+cat /etc/yum.repos.d/kubernetes.repo 
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+
+
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes (all machines)
+
+systemctl enable kubelet && systemctl start kubelet (all machines)
+
+
+*************************************************************************
+
+Only perform this below command in kubernetes in the master only
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.2
+
+10.142.0.2 --> kubernetes master server IP Address
+
+*****************************************************************************
+login as an docker user in kubernetes master server
+
+
+To start using your cluster, you need to run the following as a regular user:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+****************************************************************************************************
+
+
+run the below command from kubernetes master server
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.9
+
+************************************************************************************
+
+You can now join any number of machines by running the following on each node as root:
+
+kubeadm join 10.142.0.9:6443 --token s5ljeu.43wrsvdykzj1hhe9 --discovery-token-ca-cert-hash sha256:c27c53038c52831ed495c0f97fff8dbe617d954c4b082c9f2f325abf1049fec9
+
+
+
