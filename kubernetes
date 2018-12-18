@@ -5,6 +5,7 @@
 3. 35.188.241.6         kuber-client2 (1 CPU minimum and 2 GB RAM)
   
 2. Create user called docker in all above 3 machines and set the password as redhat
+  vi /etc/ssh/sshd_config
   
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication yes
@@ -13,11 +14,8 @@ PasswordAuthentication yes
 
 3.	Install epel-release repository in all machines
 
-#yum install epel-release -y
+#yum install epel-release vim -y
 
-4.	Install vim package in all 3 machines
-
-# yum install vim -y
 
 5.	Login to all above 3 servers and enable sudo permission for docker user with no password
 
