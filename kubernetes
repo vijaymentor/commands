@@ -1,6 +1,6 @@
 1. Install 3 centos 7 servers
 
-1. 35.245.254.20       Kuber-master (2 CPU minimum and 2 GB RAM)
+1. 35.245.254.20       kuber-master (2 CPU minimum and 2 GB RAM)
 2. 35.194.76.149       kuber-client1 (1 CPU minimum and 2 GB RAM)
 3. 35.188.241.6         kuber-client2 (1 CPU minimum and 2 GB RAM)
   
