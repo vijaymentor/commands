@@ -16,6 +16,10 @@ PasswordAuthentication yes
 
 #yum install epel-release vim -y
 
+4. Disable firewalld in all 3 machines
+
+systemctl stop firewalld;systemctl disable firewalld
+
 
 5.	Login to all above 3 servers and enable sudo permission for docker user with no password
 
@@ -81,7 +85,7 @@ $ sudo yum install docker-ce
 
 5. Start Docker.
 
-$ sudo systemctl start docker
+$ sudo systemctl start docker;systemctl enable docker;systemctl status docker
 
 6. Verify that docker is installed correctly by running the hello-world image.
 
@@ -96,7 +100,7 @@ Kubeadm configurtion --> create this repo file in all 3 machines and install kub
 
 
 
-cat /etc/yum.repos.d/kubernetes.repo 
+vi /etc/yum.repos.d/kubernetes.repo 
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
@@ -116,7 +120,7 @@ systemctl enable kubelet && systemctl start kubelet (all machines)
 
 Only perform this below command in kubernetes in the master only
 
-kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.2
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.9
 
 10.142.0.2 --> kubernetes master server IP Address
 
@@ -130,14 +134,13 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+
+
+Run 'kubectl get nodes' on the master to see this node join the cluster.
+
+
 ****************************************************************************************************
 
-
-run the below command from kubernetes master server
-
-kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.9
-
-************************************************************************************
 
 You can now join any number of machines by running the following on each node as root:
 
