@@ -20,6 +20,7 @@ PasswordAuthentication yes
 
 systemctl stop firewalld;systemctl disable firewalld
 
+4.1  create docker user in all machines and set the password as redhat
 
 5.	Login to all above 3 servers and enable sudo permission for docker user with no password
 
@@ -58,7 +59,7 @@ Install The Docker on all the 3 machines:
 
 1. Install required packages. yum-utils provides the yum-config-manager utility, and device-mapper-persistent-data and lvm2 are required by the devicemapper storage driver.
 
-$ yum install yum-utils device-mapper-persistent-data lvm2
+$ yum install yum-utils device-mapper-persistent-data lvm2 -y
 
 
 2. Use the following command to set up the stable repository. You always need the stable repository, even if you want to install builds from the edge or test repositories as well.
@@ -66,20 +67,7 @@ $ yum install yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 
-3. Optional: Enable the edge and test repositories. These repositories are included in the docker.repo file above but are disabled by default. You can enable them alongside the stable repository.
-
-$ yum-config-manager --enable docker-ce-edge
-$ yum-config-manager --enable docker-ce-test
-
-You can disable the edge or test repository by running the yum-config-manager command with the --disable flag. To re-enable it, use the --enable flag. The following command disables the edge repository.
-
-$ yum-config-manager --disable docker-ce-edge
-
-
-4. INSTALL DOCKER CE
-     Install the latest version of Docker CE, or go to the next step to install a specific version:
-
-$ sudo yum install docker-ce
+yum install -y --setopt=obsoletes=0 docker-ce-17.03.2.ce-1.el7.centos docker-ce-selinux-17.03.0.ce-1.el7.centos
 
 
 
@@ -94,6 +82,25 @@ $ sudo docker run hello-world
 7. To see docker version 
 
 docker version
+
+[root@kuber-master shankerloud1989]# docker version
+Client:
+ Version:      17.03.2-ce
+ API version:  1.27
+ Go version:   go1.7.5
+ Git commit:   f5ec1e2
+ Built:        Tue Jun 27 02:21:36 2017
+ OS/Arch:      linux/amd64
+Server:
+ Version:      17.03.2-ce
+ API version:  1.27 (minimum version 1.12)
+ Go version:   go1.7.5
+ Git commit:   f5ec1e2
+ Built:        Tue Jun 27 02:21:36 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+ 
+ 
 
 ***************************************************************************
 Kubeadm configurtion --> create this repo file in all 3 machines and install kubadm in all machine
