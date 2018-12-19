@@ -90,6 +90,9 @@ docker container run centos
 docker container run -it centos /bin/bash
 
 
+
+docker container run -dit centos /bin/bash --> if we want to run permanently in the background
+
 #To list active containers, type:
 
 docker container ls
