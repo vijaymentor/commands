@@ -111,7 +111,14 @@ To delete a container multiple containers just copy the container ID (or IDs) fr
 
 docker container rm c55680af670c
 
+**************************************************************************************************
+To see running container
 
+docker ps
+
+To see container full information
+
+docker inspect <container id >
 
 **********************************************************************************
 
@@ -251,8 +258,36 @@ vim /var/tmp/docker.html
 </body>
 </html>
 
+***********************
+To view the running containers
 
-****************************************************************************************************************************
+docker ps 
+
+To view the list of containers that are not active
+
+docker ps -a
+
+To stop a contaner
+
+docker stop <container id or container name>
+
+To start a container 
+
+docker start <container id or container name>
+
+now To remove a unwanted container
+
+docker rm <container id or container name>
+
+
+To see the container id or container name
+
+docker ps -a
+
+To remove all the containers
+
+docker rm $(docker ps -a -q)
+**************************************************************************************************************************
 ****************************************************************************************************************************
 Purging All Unused or Dangling Images, Containers, Volumes, and Networks
 Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
@@ -273,7 +308,7 @@ docker images -a
 
 Remove:
 
-docker rmi Image Image
+docker rmi <Image>
 
 Remove dangling images
 
@@ -309,7 +344,12 @@ List:
 
 docker images -a
 
-Remove:
+
+Remove single image
+
+docker image remove <image id>
+
+Remove all the images
 
 docker rmi $(docker images -a -q)
 
