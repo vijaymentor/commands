@@ -1,4 +1,4 @@
- yum install epel-release
+ yum install epel-release -y
  yum repolist
 
 #Install the required dependencies:
@@ -122,6 +122,46 @@ docker inspect <container id >
 
 **********************************************************************************
 
+***********************
+To view the running containers
+
+docker ps 
+
+To view the list of containers that are not active
+
+docker ps -a
+
+To stop a contaner
+
+docker stop <container id or container name>
+
+To start a container 
+
+docker start <container id or container name>
+
+To stop any riunning container
+
+docker stop $(docker ps -q)  
+
+now To remove a unwanted container
+
+docker rm <container id or container name>
+
+
+To see the container id or container name
+
+docker ps -a
+
+To remove all the containers
+
+docker rm $(docker ps -a -q)
+
+
+**************************************************************************************************************************
+***********************************************************************************************************************
+
+
+
 DOCKER-IMAGES
 
 We must know the exact repository name to pull corresponding docker images. So use "docker search" command to find the correct repository name to download the particular docker images.
@@ -170,6 +210,10 @@ To remove all docker images in a single command,
 
 
 
+*********************************************************************************************************************
+
+
+
 /*********************************************************
 
 Dockerfile Instructions Explained with Examples
@@ -187,7 +231,6 @@ CMD python app.py
 after you created the above file then run the below command
 
 docker build .
-
 
 
 another dockerfile for more easy understanding
@@ -258,37 +301,7 @@ vim /var/tmp/docker.html
 </body>
 </html>
 
-***********************
-To view the running containers
-
-docker ps 
-
-To view the list of containers that are not active
-
-docker ps -a
-
-To stop a contaner
-
-docker stop <container id or container name>
-
-To start a container 
-
-docker start <container id or container name>
-
-now To remove a unwanted container
-
-docker rm <container id or container name>
-
-
-To see the container id or container name
-
-docker ps -a
-
-To remove all the containers
-
-docker rm $(docker ps -a -q)
-**************************************************************************************************************************
-****************************************************************************************************************************
+***************************************************
 Purging All Unused or Dangling Images, Containers, Volumes, and Networks
 Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
 
