@@ -10,7 +10,170 @@ gcloud config config-helper --format json
 gcloud config config-helper --format='value(credential.access_token)'
 gcloud auth print-access-token generates new token
 
-<b> info </b>
+info
 
 gcloud info --format flattened
-export PROJECT=$(gcloud info --format='value(config.project)')
+
+
+zones
+
+To return a list of zones given a region
+
+gcloud compute zones list --filter=region:us-central1
+
+
+projects
+
+# various way to get project_id
+
+PROJECT_ID=$(gcloud config get-value core/project)
+
+# get project_number
+
+gcloud projects list 
+
+
+billing
+
+gcloud beta billing accounts list
+gcloud organizations list
+
+switch gcloud context with gcloud config
+
+
+gcloud config list
+gcloud config configurations list
+gcloud config set account pythonrocksk8s201702@gmail.com 
+gcloud config set project salt-163215
+gcloud config set compute/region us-west1
+gcloud config set compute/zone us-west1-a
+
+To launch cloudshell
+
+REGION=$(gcloud config get-value compute/region)
+if [[ -z "${REGION}" ]]; then
+    echo "https://cloud.google.com/compute/docs/regions-zones/changing-default-zone-region" 1>&2
+    echo "gcloud cli must be configured with a default region." 1>&2
+    echo "run 'gcloud config set compute/region REGION'." 1>&2
+    echo "replace 'REGION' with the region name like us-west1." 1>&2
+    exit 1;
+fi
+
+
+
+gcloud config set compute/region us-west1
+gcloud config set compute/zone us-west1-a
+
+**********************************************************************************************
+
+gcloud command for creating an instance?
+
+
+from web console
+
+gcloud beta compute --project=victory-demo-dev instances create micro1 --zone=us-west1-a --machine-type=f1-micro --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=398028291895-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --min-cpu-platform=Automatic --image=debian-9-stretch-v20180510 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=micro1
+
+
+*****************************************************************
+
+instances, template, target-pool and instance group
+
+
+cat << EOF > startup.sh
+#! /bin/bash
+apt-get update
+apt-get install -y nginx
+service nginx start
+sed -i -- 's/nginx/Google Cloud Platform - '"\$HOSTNAME"'/' /var/www/html/index.nginx-debian.html
+EOF
+
+gcloud compute instance-templates create nginx-template  --metadata-from-file startup-script=startup.sh
+gcloud compute target-pools create nginx-pool
+gcloud compute instance-groups managed create nginx-group \
+         --base-instance-name nginx \
+         --size 2 \
+         --template nginx-template \
+         --target-pool nginx-pool
+         
+         
+*****************************************************************************************
+
+
+firewall rules
+## ALLOW
+gcloud beta compute firewall-rules create mynetwork-allow-icmp --network mynetwork \
+--action ALLOW --direction INGRESS --rules icmp
+gcloud beta compute firewall-rules create mynetwork-allow-ssh --network mynetwork \
+--action ALLOW --direction INGRESS --rules tcp:22
+gcloud beta compute firewall-rules create mynetwork-allow-internal --network \
+mynetwork --action ALLOW --direction INGRESS --rules all \
+--source-ranges 10.128.0.0/9
+gcloud beta compute firewall-rules list \
+--filter="network:mynetwork"
+
+## DENY
+gcloud beta compute firewall-rules create mynetwork-deny-icmp \
+--network mynetwork --action DENY --direction EGRESS --rules icmp \
+--destination-ranges 10.132.0.2 --priority 500
+gcloud beta compute firewall-rules list \
+--filter="network:mynetwork AND name=mynetwork-deny-icmp"
+
+
+*****************************************************************************
+list an instance
+
+gcloud compute instances list --filter="zone:us-central1-a"
+
+
+********************************************************************************
+
+move instance
+gcloud compute instances move <instance_wanna_move> --destination-zone=us-central1-a --zone=us-central1-c
+
+********************************************************************************************
+
+generate ssh config
+gcloud compute config-ssh
+
+**************************************************************************************
+
+disk snapshot
+
+gcloud compute disks snapshot server --async --snapshot-names=server-bck --project=folkloric-grid-221412 --zone=us-east1-b
+Use [gcloud compute operations describe URI] command to check the status of the operation(s).
+
+server --> server name
+--project=folkloric-grid-221412 --> project name
+
+*********************************************************************************************888
+
+1. Get the list of images using the following command.
+
+
+gcloud compute images list
+
+2. The following command will create a Centos instance. 
+
+gcloud compute instances create devopscube --image centos-7-v20181210 --image-project centos-cloud --zone us-central1-a
+
+*************************************************************************
+
+Connecting Instance  Via Ssh
+
+To connect the instance via ssh, just execute the following command. The gcloud command will automatically create the ssh key in your ~/.ssh folder if it doesn’t exist and connects to your instance.
+
+
+gcloud compute ssh (instance-name)
+
+************************************************************
+
+Deleting The Instance
+You can delete the created instance using the following command.
+
+
+gcloud compute instances delete (instance name)
+
+
+********************************************************************
+
+
