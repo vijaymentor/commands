@@ -10,7 +10,7 @@ gcloud config config-helper --format json
 gcloud config config-helper --format='value(credential.access_token)'
 gcloud auth print-access-token generates new token
 
-info
+<b> info </b>
 
 gcloud info --format flattened
 export PROJECT=$(gcloud info --format='value(config.project)')
