@@ -175,5 +175,57 @@ gcloud compute instances delete (instance name)
 
 
 ********************************************************************
+Deploy a Kubernetes Cluster and Update Production Code in Seconds
+
+STEP 1: CREATE A CLUSTER
+Enter the following command to create a cluster:
+gcloud container clusters create myCluster
+
+STEP 2: SPIN UP A DEPLOYMENT FROM GOOGLE CONTAINER REGISTRY.
+Now let’s pull and execute a Kubernetes deployment from Google Container Registry:
+kubectl run app --image gcr.io/google-samples/hello-app:1.0
+
+STEP 3: SCALE DEPLOYMENT.
+We should scale up the deployment across three pods for redundancy:
+kubectl scale deployment app --replicas 3
+
+STEP 4: OPEN PORTS.
+Now that the website is deployed, we are ready to open it up to the world:
+kubectl expose deployment app --port 80 --type=LoadBalancer
+
+STEP 5: CONFIRM DEPLOYMENT.
+Confirm service deployment:
+kubectl get service app
+
+STEP 6: CONFIRM AVAILABILITY.
+Confirm service is deployed and available:
+curl http://198.51.100.245:80
+
+
+STEP 7: UPDATE CODEBASE.
+Let’s imagine that the website has been updated and we need to deploy the update
+d codebase to production -- it’s easy, just enter the following command:
+kubectl set image deployment app app=gcr.io/google-samples/hello-app:2.0
+
+
+STEP 8: CONFIRM UPDATE.
+Congratulations, your new website is up and running and automatically deployed t
+o all running pods! Let’s confirm:
+curl http://198.51.100.245:80
+
+
+in output --> please check 
+
+
+Watch Pods
+watch -n 1 kubectl get pods
+Every 1.0s: kubectl get pods
+ 
+$ kubectl get pods
+NAME                  READY     STATUS    RESTARTS   AGE
+app-970732273-49uqa   1/1       Running   0          8m
+app-970732273-3de90   1/1       Running   0          8m
+app-970732273-f8bea   1/1       Running   0          8m
+
 
 
