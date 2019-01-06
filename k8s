@@ -1,0 +1,149 @@
+kuber kuber
+
+kube-master1
+kube-client1
+kube-client2
+
+yum install bash-completion bash-completion-extras
+source /etc/profile.d/bash_completion.sh
+*******************************************************************
+During the practise, please disable firewall in all the machines
+systemctl stop firewalld;systemctl disable firewalld 
+
+In-production use the below commands
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+firewall-cmd --reload
+*******************************************************************
+
+1. Update the /etc/hosts  ===> On both master and client
+10.142.0.13 test-client1.us-east1-b.c.folkloric-grid-221412.internal test-client1  # Added by Google
+10.142.0.12 test-master.us-east1-b.c.folkloric-grid-221412.internal test-master
+
+2. modprobe br_netfilter;echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables ===> On both master and client
+
+3. swapoff -a ===> On both master and client
+
+After executing the above command,check the /etc/fstab if there is any entry for swap and disable it.
+
+4. yum install yum-utils device-mapper-persistent-data lvm2 ===> On both master and client
+
+5. yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ===> On both master and client
+
+yum list docker-ce --showduplicates | sort -r
+
+6. yum install -y --setopt=obsoletes=0 docker-ce-17.03.2.ce-1.el7.centos docker-ce-selinux-17.03.0.ce-1.el7.centos ===> On both master and client
+
+7. systemctl enable docker;systemctl start docker ===> On both master and client
+
+8. docker version
+Client:
+ Version:      17.03.2-ce
+ API version:  1.27
+ Go version:   go1.7.5
+ Git commit:   f5ec1e2
+ Built:        Tue Jun 27 02:21:36 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.03.2-ce
+ API version:  1.27 (minimum version 1.12)
+ Go version:   go1.7.5
+ Git commit:   f5ec1e2
+ Built:        Tue Jun 27 02:21:36 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+
+9. cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+
+9.1 yum repolist 
+
+10. yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes ===> On both master and client
+
+11. systemctl enable kubelet && systemctl start kubelet ===> On both master and client
+
+12. cat <<EOF >  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+"ifconfig -a"  Note the Master Server ip address
+
+13. kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.142.0.4 ====> only on master
+
+10.142.0.12 -- Please modify with your master IP address
+
+14.  only on master 
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+15. Only on Master
+
+[root@test-master ~]# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
+
+Output:
+
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.extensions/kube-flannel-ds-amd64 created
+daemonset.extensions/kube-flannel-ds-arm64 created
+daemonset.extensions/kube-flannel-ds-arm created
+daemonset.extensions/kube-flannel-ds-ppc64le created
+daemonset.extensions/kube-flannel-ds-s390x created
+
+16. kubeadm join 10.142.0.12:6443 --token 4y13zr.3jjcn6egskm78xg8 --discovery-token-ca-cert-hash sha256:69f0f8640221684935bb47bbd9925aebde6d4086a525f7c3094759f03a4270ee ====> only on client
+
+17. kubectl get pods --all-namespaces  Only on Master
+
+18. To Launch a deployment
+    kubectl create deployment --image nginx my-nginx ===> Where you configured the admin client to execute K8s admin commands
+
+19. kubectl get nodes === Only on Master(Wherever you configured server properties you can run)
+NAME           STATUS   ROLES    AGE     VERSION
+test-client1   Ready    <none>   89s     v1.13.1
+test-master    Ready    master   5m51s   v1.13.1
+
+20. kubectl get pods ====> Only on Master
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-6cc48cd8db-flj4n   1/1     Running   0          11s
+[root@test-master ~]#
+
+21. kubectl create service nodeport my-nginx --tcp=80:80
+	Make sure there is no error. Now check the nginx service nodeport and IP using the kubectl	 command below.
+		
+22. kubectl get pods
+		NAME                    READY   STATUS    RESTARTS   AGE
+		nginx-55bd7c9fd-jx54m   1/1     Running   0          2m13s
+
+23. kubectl get svc
+		NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+		kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        69m
+		nginx        NodePort    10.104.162.140   <none>        80:30217/TCP   25s
+
+24. From the 'kubernet-master' server run the curl command below.
+		#curl kub-client1:31017
+		#curl kub-client2:30217
+		The Nginx Pod has now been deployed under the Kubernetes cluster and it's accessible via		the internet.
+		Now access from the web browser.
+		http://<<IP>>:30217/
+		And you will get the Nginx default page.
+		Make sure all kube-system pods status is 'running'.
+Addons: 
+
+25. We can get the detailed information about a POD using describe option.
+kubectl describe pod <pod name> --namespace=kube-system
+
+26. In case if you forget to make a note of kubeadm join information, use the below command from the master server to retrieve the join information.
+kubeadm token create --print-join-command
