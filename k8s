@@ -4,7 +4,7 @@ kube-master1
 kube-client1
 kube-client2
 
-yum install bash-completion bash-completion-extras
+yum install bash-completion bash-completion-extras -y
 source /etc/profile.d/bash_completion.sh
 *******************************************************************
 During the practise, please disable firewall in all the machines
