@@ -6,6 +6,18 @@ kube-client2
 
 yum install bash-completion bash-completion-extras -y
 source /etc/profile.d/bash_completion.sh
+
+systemctl disable firewalld;systemctl stop firewalld
+
+vi /etc/selinux/config 
+
+change from enforcing to permissive
+
+save this file 
+
+you run this following command
+
+setenforce 0
 *******************************************************************
 During the practise, please disable firewall in all the machines
 systemctl stop firewalld;systemctl disable firewalld 
