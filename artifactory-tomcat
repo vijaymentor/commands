@@ -19,6 +19,19 @@ PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
 
 source ~/.bash_profile
 
+wget http://www.trieuvan.com/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
+tar xvf apache-maven-3.6.2-bin.tar.gz 
+mv apache-maven-3.6.2  /usr/local/apache-maven
+vim ~/.bash_profile
+
+export M2_HOME=/usr/local/apache-maven
+export M2=$M2_HOME/bin 
+export PATH=$M2:$PATH
+
+source ~/.bash_profile
+
+mvn -version
+
 
 
 
