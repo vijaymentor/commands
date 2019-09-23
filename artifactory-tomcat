@@ -77,3 +77,10 @@ http://192.168.122.32:8080/
 http://192.168.149.22:8081/artifactory/
 
 vi /usr/share/tomcat/conf/server.xml --> port change in tomcat
+
+
+in artifactory console
+
+http://35.232.21.100:8081/artifactory/list/libs-snapshot-local/com/wakaleo/gameoflife/gameoflife-web/1.0-SNAPSHOT/gameoflife-web-1.0-20190923.100047-1.war
+
+
