@@ -4,10 +4,11 @@ Artifactory
 
 yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
 systemctl stop firewalld;systemctl disable firewalld
- ntpdate pool.ntp.org
+ntpdate pool.ntp.org
+wget http://www.trieuvan.com/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
+tar xvf apache-maven-3.6.2-bin.tar.gz 
+mv apache-maven-3.6.2  /usr/local/apache-maven
  
- 
-
 vim ~/.bash_profile
 
 In this file
@@ -15,15 +16,6 @@ In this file
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 export JRE_HOME=/usr/lib/jvm/java-1.8.0/jre
 PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$JRE_HOME/bin
-
-
-source ~/.bash_profile
-
-wget http://www.trieuvan.com/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
-tar xvf apache-maven-3.6.2-bin.tar.gz 
-mv apache-maven-3.6.2  /usr/local/apache-maven
-vim ~/.bash_profile
-
 export M2_HOME=/usr/local/apache-maven
 export M2=$M2_HOME/bin 
 export PATH=$M2:$PATH
