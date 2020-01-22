@@ -1,4 +1,4 @@
-yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
+yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp git -y
 systemctl stop firewalld;systemctl disable firewalld
 ntpdate pool.ntp.org
 wget http://www.trieuvan.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
@@ -44,7 +44,6 @@ Email Extension Template
 http://192.168.122.31:8080/
 
 
-yum install git maven -y
 
 
 
