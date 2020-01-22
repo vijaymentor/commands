@@ -5,9 +5,9 @@ Artifactory
 yum install epel-release  java-1.8.0-openjdk-devel vim wget ntp -y
 systemctl stop firewalld;systemctl disable firewalld
 ntpdate pool.ntp.org
-wget http://www.trieuvan.com/apache/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
-tar xvf apache-maven-3.6.2-bin.tar.gz 
-mv apache-maven-3.6.2  /usr/local/apache-maven
+wget http://www.trieuvan.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar xvf apache-maven-3.6.3-bin.tar.gz
+mv apache-maven-3.6.3  /usr/local/apache-maven
  
 vim ~/.bash_profile
 
