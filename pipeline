@@ -99,3 +99,8 @@ docker and jenkins id now enabled sudo access.
 
 *****************************************************************************************
 
+finally if you want to test demo calculator application
+
+then 
+
+35.221.9.20:7001/add?number1=1&number2=3
