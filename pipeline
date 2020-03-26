@@ -35,6 +35,19 @@ Build Pipeline
 Deploy to container
 Email Extension Template
 Pipeline Maven Integration
+Docker plugin
+Docker Slaves Plugin
+Pipeline
+Pipeline Maven Integration Plugin
+Publish Over SSH
+SSH Pipeline Steps
+
+***********************************************************
+in the credentials add
+
+docker-hub-credentials.while adding the id should be docker-hub-credentials
+
+
 
 [root@master java-1.8.0]# cat /var/lib/jenkins/secrets/initialAdminPassword
 9da04e163934413fbb5128977ec567bb
