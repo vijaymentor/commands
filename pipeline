@@ -19,8 +19,7 @@ export PATH=$M2:$PATH
 source ~/.bash_profile
 
 mvn -version
-
-
+***********************************************above sshould be done in both jenkins and slave machines*****************************
 
 wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 
@@ -35,6 +34,7 @@ dashboard view
 Build Pipeline
 Deploy to container
 Email Extension Template
+Pipeline Maven Integration
 
 [root@master java-1.8.0]# cat /var/lib/jenkins/secrets/initialAdminPassword
 9da04e163934413fbb5128977ec567bb
@@ -75,3 +75,14 @@ sudo systemctl enable docker
 sudo gpasswd -a sangeetha docker (without adding rajeshcnl61 user to docker group,we cant run any command without sudo)
 sudo gpasswd -a sangeetha wheel
 *************************************************************************************************
+add into sudoers file in both master jenkins and slave servers
+
+sangeetha ALL=(ALL)     NOPASSWD: ALL
+docker  ALL=(ALL)       NOPASSWD: ALL
+jenkins ALL=(ALL)       NOPASSWD: ALL
+
+sangeetha my login linux id
+docker and jenkins id now enabled sudo access.
+
+*****************************************************************************************
+
