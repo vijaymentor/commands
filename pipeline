@@ -35,10 +35,6 @@ Build Pipeline
 Deploy to container
 Email Extension Template
 Pipeline Maven Integration
-Docker plugin
-Docker Slaves Plugin
-Pipeline
-Pipeline Maven Integration Plugin
 Publish Over SSH
 SSH Pipeline Steps
 
