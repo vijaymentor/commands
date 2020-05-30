@@ -35,9 +35,9 @@ wget https://bintray.com/jfrog/artifactory-rpms/rpm -O /etc/yum.repos.d/bintray-
 
 yum install jfrog-artifactory-oss
 
-vim /opt/jfrog/artifactory/bin/artifactory.default
+vim /opt/jfrog/artifactory/app/bin/artifactory.default --> Just for reference
 
-change heap size to 512mb
+change heap size to 512mb --> if you want play in testing this also just for reference
 
 
 artifactory is webapps which deployed over tomcat
