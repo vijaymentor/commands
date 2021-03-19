@@ -1,3 +1,5 @@
+ 
+ ----########### configure docker in one new linux machine ...dont install dockerin same jenkins machine #####
  yum install epel-release -y
  yum repolist
 
@@ -33,6 +35,10 @@ systemctl enable docker
 #At the time of the writing of this article, the current stable version of Docker is 18.03.1, we can check our Docker version by typing:
 
 docker -v
+
+sudo gpasswd -a jenkins docker
+
+---> in the above commmand jenkins is the username
 
 #To verify Docker is installed successfully and that you can run docker commands without sudo run the following command which will download a test image, run it in a container, print a “Hello from Docker” message and exit:
 
