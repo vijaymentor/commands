@@ -1,0 +1,111 @@
+https://linuxize.com/post/install-java-on-ubuntu-18-04/
+
+On Linux:
+
+unset DISPLAY
+cd denodo-install-8.0
+chmod +x installer_cli.sh
+./installer_cli.sh install
+
+Do you accept the terms of this license agreement? (y / n) :
+
+Setup type (express / custom) (default: express) : 
+
+Installation path : /opt/denodo
+
+License file path (if you do not have a license file now, you will be able to provide it later) : 
+/root/denodo-express-lic-8_0-202105.lic
+
+Available locales : ad_euro ar at at_euro au_cst au_est au_wst be be_euro bo ca_cst ca_est ca_euro ca_mst ca_nst ca_prt ca_pst ch cl co cz da de de_ch de_euro do es es_euro es_euro_jdbc eu_euro fi fi_euro fr fr_euro gb gl_euro gr gr_euro hu ie ie_euro it it_euro jp lu lu_euro mx nl nl_euro no pe pl pl_euro pt pt_euro py rfc_restful ru se si si_euro sv us_ast us_cst us_cst_cdt us_est us_hst us_mst us_mst_mdt us_pst us_pst_pdt us_utc_iso uy ve za 
+Locale (default: au_cst) : 
+
+Select products to install ... 
+Virtual DataPort (y / n / full) :
+
+Administration Tool (y / n) : 
+y
+
+Data Catalog (y / n) : 
+y
+
+Web Design Studio (y / n) : 
+y
+
+Virtual DataPort Server (y / n) : 
+y
+
+Diagnostic & Monitoring Tool (y / n) : 
+y
+
+ITPilot (y / n / full) : 
+y
+
+
+Wrapper Generator Tool (y / n) : 
+y
+
+Browser Pool (y / n) : 
+y
+
+Wrapper Server (y / n) : 
+y
+
+Verification Server (y / n) : 
+y
+
+Administration Tool (y / n) : 
+y
+
+Wrapper Client Environment (y / n) : 
+y
+
+Scheduler (y / n / full) : 
+y
+
+Administration Tool (y / n) : 
+y
+
+Scheduler Server (y / n) : 
+y
+
+Scheduler Index Server (y / n) : 
+y
+
+
+
+
+    - ODBC port number : 9996
+    - Shutdown port number : 9998
+    - Server port for JMX monitoring number : 9997
+    - Auxiliary port for JMX monitoring number : 9995
+  - Diagnostic & Monitoring Tool
+- ITPilot
+  - Wrapper Generator Tool
+  - Browser Pool
+    - Server port number : 6001
+    - Shutdown port number : 6002
+    - Auxiliary port number : 6003
+  - Wrapper Server
+    - Server port number : 9999
+    - ODBC port number : 9996
+    - Shutdown port number : 9998
+    - Server port for JMX monitoring number : 9997
+    - Auxiliary port for JMX monitoring number : 9995
+  - Verification Server
+    - Server port number : 7001
+    - Shutdown port number : 7002
+    - Auxiliary port number : 7003
+  - Administration Tool
+  - Wrapper Client Environment
+  - External Programs
+    - Open Office installation directory : 
+- Scheduler
+  - Administration Tool
+  - Scheduler Server
+    - Server port number : 8000
+    - Shutdown port number : 7999
+    - Auxiliary port number : 7998
+  - Scheduler Index Server
+    - Server port number : 9000
+    - Shutdown port number : 8999
+    - Auxiliary port number : 8998
