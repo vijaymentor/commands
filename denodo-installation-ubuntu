@@ -133,3 +133,14 @@ Modify pack selection.
 [ Processing package: Scheduler (15/18) ]
 [ Processing package: Administration Tool (16/18) ]
 [ Processing package: Scheduler Index Server (17/18) ]
+[ Processing package: Scheduler Server (18/18) ]
+
+Reading update installation file ...
+WARNING! Before proceeding, please
+
+1) stop all the Denodo servers and administration tools;
+
+2) close all instances of Microsoft Internet Explorer.
+
+Uncompressing update(s) into denodo home directory ...
+Applying update(s) ...
