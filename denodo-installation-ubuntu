@@ -144,3 +144,12 @@ WARNING! Before proceeding, please
 
 Uncompressing update(s) into denodo home directory ...
 Applying update(s) ...
+
+
+Executing ... "executeCommandIfInstalled vdp[vdpserver] "setPermissions -os=linux +x ${install.dir}/samples/vdp/customPolicies/scripts/compile_custompolicies.sh""
+Update 4/4 - Command 308/308 - 100%
+Deleting temporary file(s) and directory(s) ...
+Update process finished successfully.
+[ Unpacking finished ]
+[ Writing the uninstaller data ... ]
+[ Automated installation done ]
