@@ -109,3 +109,27 @@ y
     - Server port number : 9000
     - Shutdown port number : 8999
     - Auxiliary port number : 8998
+    
+The autoinstallation file has been written to 'denodo-platform-autoinstall-1623226540482.xml'
+Installing Denodo Platform ...
+[ Starting automated installation ]
+Read pack list from xml definition.
+Modify pack selection.
+[ Starting to unpack ]
+[ Processing package: Common (1/18) ]
+[ Processing package: Virtual DataPort (2/18) ]
+[ Processing package: Administration Tool (3/18) ]
+[ Processing package: Web Design Studio (4/18) ]
+[ Processing package: Data Catalog (5/18) ]
+[ Processing package: Virtual DataPort Server (6/18) ]
+[ Processing package: Diagnostic & Monitoring Tool (7/18) ]
+[ Processing package: ITPilot (8/18) ]
+[ Processing package: Wrapper Generator Tool (9/18) ]
+[ Processing package: Browser Pool (10/18) ]
+[ Processing package: Wrapper Server (11/18) ]
+[ Processing package: Verification Server (12/18) ]
+[ Processing package: Administration Tool (13/18) ]
+[ Processing package: Wrapper Client Environment (14/18) ]
+[ Processing package: Scheduler (15/18) ]
+[ Processing package: Administration Tool (16/18) ]
+[ Processing package: Scheduler Index Server (17/18) ]
